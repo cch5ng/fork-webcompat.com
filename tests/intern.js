@@ -5,6 +5,7 @@
 // Learn more about configuring this file at <https://github.com/theintern/intern/wiki/Configuring-Intern>.
 // These default settings work OK for most people. The options that *must* be changed below are the
 // packages, suites, excludeInstrumentation, and (if you want functional tests) functionalSuites.
+// Configurations specific to Travis-BrowserStack tests (triggered by PR's and branch commits to webcompat)
 define(['intern/lib/args'], function(args) {
   'use strict';
 
@@ -26,9 +27,21 @@ define(['intern/lib/args'], function(args) {
     proxyUrl: 'http://127.0.0.1:9090/',
     siteRoot: siteRoot,
 
+    // Selenium vers on BrowserStack
+    capabilities: {
+      'browserstack.selenium_version': '2.52.0'
+    },
+
+    // Required for BrowserStack, Maximum number of simultaneous integration tests allowed
+    maxConcurrency: 2,
+
     environments: [
-      { browserName: 'firefox' }
+      { browser: 'firefox', browser_version: '44', os : 'OS X', os_version : 'El Capitan' },
+      { browser: 'chrome', browser_version: '50', os : 'OS X', os_version : 'El Capitan' }
     ],
+
+    //browserstack
+    tunnel: 'BrowserStackTunnel',
 
     // Beauty, Bob.
     reporters: 'pretty',

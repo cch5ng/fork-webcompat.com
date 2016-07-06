@@ -65,7 +65,8 @@ define([
         .setFindTimeout(intern.config.wc.pageLoadTimeout)
         .get(require.toUrl(url('/issues/' + issueNumber)))
         .findByCssSelector('body').click()
-        .type('g')
+        //TEST browserstack support fix to issue where element not found before keystroke
+        .findByCssSelector('body').type('g')
         .end()
         // look for the issue container on github.com/foo/bar/issues/N
         .findByCssSelector('.gh-header.issue').isDisplayed()
