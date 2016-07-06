@@ -66,6 +66,7 @@ define([
         .get(require.toUrl(url('/issues/' + issueNumber)))
         .findByCssSelector('body').click()
         //TEST browserstack support fix to issue where element not found before keystroke
+        //so far this breaks local test but check on travis/browserstack
         .findByCssSelector('body').type('g')
         .end()
         // look for the issue container on github.com/foo/bar/issues/N
